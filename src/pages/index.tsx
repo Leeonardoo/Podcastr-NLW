@@ -7,6 +7,8 @@ import durationToTimeString from '../utils/durationToTimeString'
 import Link from 'next/link'
 
 import styles from './home.module.scss'
+import { useContext } from 'react'
+import { PlayerContext } from '../contexts/PlayerContext'
 
 type Episode = {
     id: string
@@ -25,6 +27,8 @@ type HomeProps = {
 }
 
 export default function Home(props: HomeProps) {
+    const { play } = useContext(PlayerContext)
+
     return (
         <div className={styles.homepage}>
             <section className={styles.latestEpisodes}>
@@ -51,7 +55,7 @@ export default function Home(props: HomeProps) {
                                     <span>{episode.durationAsString}</span>
                                 </div>
 
-                                <button type="button">
+                                <button type="button" onClick={() => {play(episode)}}>
                                     <img src="/play-green.svg" alt="Tocar episódio"/>
                                 </button>
                             </li>
@@ -80,7 +84,8 @@ export default function Home(props: HomeProps) {
                         return (
                             <tr key={episode.id}>
                                 <td style={{ width: 72 }}>
-                                    <Image width={120} height={120} src={episode.thumbnail} alt={episode.title} objectFit="cover"/>
+                                    <Image width={120} height={120} src={episode.thumbnail} alt={episode.title}
+                                           objectFit="cover"/>
                                 </td>
 
                                 <td>
