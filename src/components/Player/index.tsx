@@ -44,7 +44,6 @@ export function Player() {
                 </div>
 
 
-
             </footer>
 
         </div>
